@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainAnchorPane" minWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MassFileEditorController">
+   <children>
+      <GridPane prefHeight="500.0" prefWidth="580.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="326.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="138.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="103.0" />
+        </columnConstraints>
+        <rowConstraints> 
+          <RowConstraints maxHeight="245.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="245.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="directoryText" onKeyReleased="#updateFileList" onKeyTyped="#updateFileList" prefHeight="25.0" prefWidth="270.0" promptText="Choose A Directory..">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="chooseDirectory" mnemonicParsing="false" onAction="#chooseFiles" prefHeight="25.0" prefWidth="92.0" text="Change Directory" textAlignment="CENTER" GridPane.columnIndex="1">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ListView fx:id="filesList" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="232.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label text="Matching files in this directory" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="158.0" />
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="124.0" minWidth="10.0" prefWidth="124.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="144.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="276.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="276.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Extension Filter" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                  <TextField fx:id="extensionFilterField" minWidth="-Infinity" onKeyReleased="#updateFilter" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <Label text="Selection Type" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                  <ChoiceBox fx:id="selectionType" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ChoiceBox>
+                  <Label fx:id="selectionLabel1" prefHeight="37.0" prefWidth="94.0" text="Replace substring" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                  <Label fx:id="selectionLabel2" text="With" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <TextField fx:id="replaceTextField" maxWidth="100.0" onKeyReleased="#updateReplaceText" prefWidth="90.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <TextField fx:id="replaceWithTextField" maxWidth="100.0" onKeyReleased="#updateReplaceWithText" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <Button mnemonicParsing="false" onAction="#modifyFiles" text="Modify Files" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                  <CheckBox fx:id="replaceCaseCheck" mnemonicParsing="false" onAction="#updateIgnoreReplaceCase" selected="true" text="Ignore Case" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="instanceReplaceSelection" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <CheckBox fx:id="addCaseCheck" mnemonicParsing="false" onAction="#updateIgnoreAddAfterCase" selected="true" text="Ignore Case" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <TextField fx:id="removeTextField" maxWidth="100.0" onKeyReleased="#updateRemoveText" prefWidth="90.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <TextField fx:id="addTextField" maxWidth="100.0" onKeyReleased="#updateAddText" prefWidth="90.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <CheckBox fx:id="removeCaseCheck" mnemonicParsing="false" onAction="#updateIgnoreRemoveCase" selected="true" text="Ignore Case" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="instanceRemoveSelection" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <TextField fx:id="addAfterTextField" maxWidth="100.0" onKeyReleased="#updateAddTextAfter" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="instanceAddSelection" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="paddingType" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <TextField fx:id="paddingZeroes" maxWidth="100.0" promptText="Greater than 0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="instanceNumberSelection" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                  <TextField fx:id="ignoreNumbers" maxWidth="100.0" onKeyReleased="#updateIgnoreNums" promptText="1,2,3" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <Label fx:id="ignoreLabel" text="Ignore these numbers" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding></Label>
+                  <ChoiceBox fx:id="ignoreSelection" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <Label fx:id="errorLabel" text="Error Label" textFill="#dd1313" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="instanceReplaceCounter" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <TextField fx:id="instanceRemoveCounter" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <TextField fx:id="instanceAddCounter" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <TextField fx:id="instanceNumCounter" maxWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="numInstancesLabel" text="n Instances" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     <padding>
+                        <Insets top="25.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="instancesLabel" text="n Instances" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </GridPane>
+            <Button mnemonicParsing="false" onAction="#undoLastChange" text="Undo Last" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
